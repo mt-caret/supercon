@@ -9,16 +9,16 @@ int main(void) {
 		v_push_back(&v, &i);
 	for (i = 0; i < 50; i++)
 		printf("%d\n", *((int *) v_get(&v, i)));
-  v_free(&v);
+	v_free(&v);
 
-  vector *v2;
-  v_init(v2, sizeof(char));
+	vector *v2;
+	v_init(v2, sizeof(char));
 	char *str = "Hello, World!";
-  for (i = 0; i < strlen(str); i++)
+	for (i = 0; i < strlen(str); i++)
 		v_push_back(v2, str + i);
-  for (i = 0; i < v2->size; i++)
+	for (i = 0; i < v2->size; i++)
 		printf("%c", *((char *) v_get(v2, i)));
-  v_free(v2);
+  	v_free(v2);
 	printf("\nCompleted!\n");
 	return 0;
 }
