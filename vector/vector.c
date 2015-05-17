@@ -17,7 +17,7 @@ typedef struct vector {
 	size_t sizeof_type;
 } vector;
 
-vector *v_init_with_capacity(size_t sizeof_type, size_t capacity) {
+vector *v_create_with_capacity(size_t sizeof_type, size_t capacity) {
 	vector *v = malloc(sizeof(vector));
 	if (v == NULL) mem_abort();
 	v->capacity = capacity;
@@ -27,8 +27,8 @@ vector *v_init_with_capacity(size_t sizeof_type, size_t capacity) {
 	if (v->items == NULL) mem_abort();
 	return v;
 }
-vector *v_init(size_t sizeof_type) {
-	return v_init_with_capacity(v, sizeof_type, V_INIT_CAP);
+vector *v_create(size_t sizeof_type) {
+	return v_create_with_capacity(v, sizeof_type, V_INIT_CAP);
 }
 void *v_index(vector *v, size_t index) {
 	return (void *)((char *) v->items + v->sizeof_type * index);
