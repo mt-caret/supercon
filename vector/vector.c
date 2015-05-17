@@ -17,17 +17,18 @@ typedef struct vector {
 	size_t sizeof_type;
 } vector;
 
-void v_init_with_capacity(vector *v, size_t sizeof_type, size_t capacity) {
+vector *v_init_with_capacity(size_t sizeof_type, size_t capacity) {
+	vector *v = malloc(sizeof(vector));
+	if (v == NULL) mem_abort();
 	v->capacity = capacity;
 	v->size = 0;
 	v->sizeof_type = sizeof_type;
 	v->items = malloc(sizeof_type * capacity);
 	if (v->items == NULL) mem_abort();
-}
-vector* v_init(size_t sizeof_type) {
-	vector *v = malloc(sizeof(vector));
-	v_init_with_capacity(v, sizeof_type, V_INIT_CAP);
 	return v;
+}
+vector *v_init(size_t sizeof_type) {
+	return v_init_with_capacity(v, sizeof_type, V_INIT_CAP);
 }
 void *v_index(vector *v, size_t index) {
 	return (void *)((char *) v->items + v->sizeof_type * index);
@@ -50,7 +51,7 @@ void v_push_back(vector *v, void *item) {
 	v->size++;
 }
 void v_delete(vector *v, int index) {
-  if (index != v-> size - 1) {
+	if (index != v-> size - 1) {
 		memmove(v_index(v, index), v_index(v, index + 1), v->sizeof_type * (v->size - index - 1));
 	}
 	/*int i;
