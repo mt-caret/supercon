@@ -28,7 +28,7 @@ vector *v_create_with_capacity(size_t sizeof_type, size_t capacity) {
 	return v;
 }
 vector *v_create(size_t sizeof_type) {
-	return v_create_with_capacity(v, sizeof_type, V_INIT_CAP);
+	return v_create_with_capacity(sizeof_type, V_INIT_CAP);
 }
 void *v_index(vector *v, size_t index) {
 	return (void *)((char *) v->items + v->sizeof_type * index);
