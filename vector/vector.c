@@ -24,8 +24,10 @@ void v_init_with_capacity(vector *v, size_t sizeof_type, size_t capacity) {
 	v->items = malloc(sizeof_type * capacity);
 	if (v->items == NULL) mem_abort();
 }
-void v_init(vector *v, size_t sizeof_type) {
+vector* v_init(size_t sizeof_type) {
+	vector *v = malloc(sizeof(vector));
 	v_init_with_capacity(v, sizeof_type, V_INIT_CAP);
+	return v;
 }
 void *v_index(vector *v, size_t index) {
 	return (void *)((char *) v->items + v->sizeof_type * index);
@@ -65,5 +67,6 @@ void v_delete(vector *v, int index) {
 }
 void v_free(vector *v) {
 	free(v->items);
+	free(v);
 }
 
