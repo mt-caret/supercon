@@ -49,12 +49,12 @@ void v_push_back(vector *v, void *item) {
 	v_set(v, v->size, item);
 	v->size++;
 }
-void v_delete(vector *v, int index) {
+void v_delete(vector *v, int index, int auto_resize) {
 	if (index != v-> size - 1) {
 		memmove(v_index(v, index), v_index(v, index + 1), v->sizeof_type * (v->size - index - 1));
 	}
 	v->size--;
-	if (v->size > 0 && v->size <= (size_t)(v->capacity / V_SCALE_FACTOR / V_SCALE_FACTOR))
+	if (auto_resize && v->size > 0 && v->size <= (size_t)(v->capacity / V_SCALE_FACTOR / V_SCALE_FACTOR))
 		v_resize(v, v->capacity / V_SCALE_FACTOR);
 }
 void v_free(vector *v) {
