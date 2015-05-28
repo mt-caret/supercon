@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 		for (i = 0; i < load; i++)
 			iv_push_back(v, i);
 		for (i = load - 1; i >= 0; i--)
-			v_delete(v, i);
+			v_delete(v, i, 0);
 	}
 	v_free(v);
 
