@@ -8,13 +8,14 @@ int main(int argc, char **argv) {
 	if (argc != 3) exit(-1);
 	long load = atol(argv[1]), rep = atol(argv[2]);
 
-	vector<int> v = vector<int>(load);
+	vector<int> v;
+	v.reserve(load);
 	while(rep--) {
 		for (long i = 0; i < load; i++) {
 			v.push_back(i);
 		}
 		for (long i = 0; i < load; i++) {
-			v.pop_back();
+			v.erase(v.begin(), v.begin()+1);
 		}
 	}
 	
