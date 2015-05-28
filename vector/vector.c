@@ -4,7 +4,7 @@
 
 void mem_abort(void) {
 	fprintf(stderr, "error (re)allocating memory.¥n");
-	abort();
+	exit(-1);
 }
 
 #define V_INIT_CAP 4
