@@ -41,7 +41,7 @@ void v_resize(vector *v, size_t new_capacity) {
 void v_set(vector *v, int index, void *item) {
 	memcpy(v_index(v, index), item, v->sizeof_type);
 }
-void *v_get(vector *v, int index) {
+void *v_at(vector *v, int index) {
 	return v_index(v, index);
 }
 void v_push_back(vector *v, void *item) {
@@ -63,6 +63,6 @@ void v_free(vector *v) {
 }
 
 #define iv_create() (v_create(sizeof(int)))
-#define iv_get(v, index) (*((int *)v_get((v), (index))))
+#define iv_at(v, index) (*((int *)v_at((v), (index))))
 #define iv_push_back(v, item) {int __vdum = item; v_push_back(v, &__vdum);}
 
