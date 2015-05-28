@@ -1,11 +1,15 @@
-CFLAGS = -Wall -g -std=c89
-SOURCES = test.c
-OBJECTS = $(SOURCES:.c=.o)
+CC := gcc
+LD := gcc
+CFLAGS := -Wall -g -std=c89
 
-all: clean test 
-test: $(OBJECTS)
-	gcc $(CFLAGS) -o test $(OBJECTS)
-$(OBJECTS):
-	gcc $(CFLAGS) -c $(SOURCES)
+all: clean test_cap test_nocap test_cpp
+test_nocap: test_nocap.o
+	$(LD) -o $@ $<
+test_cap: test_cap.o
+	$(LD) -o $@ $<
+test_cap.o test_nocap.o:
+	$(CC) $(CFLAGS) -c -o $@ $*.c
+test_cpp:
+	g++ -Wall -g -o $@ $@.cpp
 clean:
-	rm -rf $(OBJECTS) test
+	rm -rf *.o test_nocap test_cap test_cpp
