@@ -9,7 +9,6 @@ void mem_abort(void) {
 
 #define V_INIT_CAP 4
 #define V_SCALE_FACTOR 2 
-/*TODO: tweak values*/
 typedef struct vector {
 	void *items;
 	size_t capacity;
@@ -54,20 +53,16 @@ void v_delete(vector *v, int index) {
 	if (index != v-> size - 1) {
 		memmove(v_index(v, index), v_index(v, index + 1), v->sizeof_type * (v->size - index - 1));
 	}
-	/*int i;
-	for(i = index; i < v->size - 1; i++) {
-		int j;
-		for(j = 0; j < v->sizeof_type; i++) {
-			*((char *)(v_index(v, i)) + j) = *((char *)(v_index(v, i + 1)) + j);
-		}
-	}*/
 	v->size--;
-	/*if (v->size > 0 && v->size <= (size_t)(v->capacity / V_SCALE_FACTOR / V_SCALE_FACTOR))
-		v_resize(v, v->capacity / V_SCALE_FACTOR);*/
-	/*TODO: check if shrink routine works*/
+	if (v->size > 0 && v->size <= (size_t)(v->capacity / V_SCALE_FACTOR / V_SCALE_FACTOR))
+		v_resize(v, v->capacity / V_SCALE_FACTOR);
 }
 void v_free(vector *v) {
 	free(v->items);
 	free(v);
 }
+
+#define iv_create() (v_create(sizeof(int)))
+#define iv_get(v, index) (*((int *)v_get((v), (index))))
+#define iv_push_back(v, item) {int __vdum = item; v_push_back(v, &__vdum);}
 
